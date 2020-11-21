@@ -32,7 +32,7 @@
      <rect>
       <x>420</x>
       <y>20</y>
-      <width>691</width>
+      <width>681</width>
       <height>521</height>
      </rect>
     </property>
@@ -128,7 +128,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Polynomial Fit</string>
     </property>
    </widget>
    <widget class="QTableWidget" name="inputTable">
@@ -137,8 +137,34 @@
       <x>20</x>
       <y>190</y>
       <width>371</width>
-      <height>351</height>
+      <height>311</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="addRow">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>510</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add Row</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="removeRow">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>510</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Remove Row</string>
     </property>
    </widget>
   </widget>

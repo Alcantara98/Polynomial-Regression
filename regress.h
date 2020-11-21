@@ -18,6 +18,12 @@ public:
 private slots:
     void on_Plot_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_addRow_clicked();
+
+    void on_removeRow_clicked();
+
 private:
     Ui::Regress *ui;
 };
