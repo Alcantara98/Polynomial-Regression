@@ -13,18 +13,24 @@ class Regress : public QMainWindow
 
 public:
     Regress(QWidget *parent = nullptr);
+
+    void secondOrderPolyFit();
+
     ~Regress();
 
 private slots:
     void on_Plot_clicked();
 
-    void on_pushButton_clicked();
-
     void on_addRow_clicked();
 
     void on_removeRow_clicked();
 
+    void on_polyFit_clicked();
+
 private:
     Ui::Regress *ui;
+    QVector<double> inputX, inputY, fitX, fitY;
+    int xMax= 5, yMax = 5, xMin = 0, yMin = 0;
+    double probToChose, numOfIterations, alpha;
 };
 #endif // REGRESS_H
