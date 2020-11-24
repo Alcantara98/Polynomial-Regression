@@ -1,4 +1,4 @@
-# Polynomial-Regression
+# Polynomial Regression
 ## About
 Earlier this year, in the artificial intelligence paper I took, we created a Python application 
 that used gradient descent to fit a first order polynomial to a set of points. I decided to re-visit 
@@ -9,10 +9,10 @@ so in the end I decided to do it analytically using the least squares method.
 [Here](https://www.youtube.com/watch?v=TPKyT3hu71c) is a video explaining the method.
 
 ## Technologies
-C++
-QT Creator
-QCustomPlot
-Git
+- C++
+- QT Creator
+- QCustomPlot
+- Git
 
 ## How to Use
 The latest version is in the folder 'V1.02' of the repository. Just download it and run 'Regress.exe'.  
