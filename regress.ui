@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1125</width>
-    <height>592</height>
+    <height>597</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -90,7 +90,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>60</y>
+      <y>20</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -116,19 +116,6 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>131</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Choose the degree of</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
@@ -142,17 +129,17 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QPushButton" name="randomValues">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>40</y>
-      <width>141</width>
-      <height>20</height>
+      <y>60</y>
+      <width>171</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>the polynomial:</string>
+     <string>Generate Random Values</string>
     </property>
    </widget>
   </widget>

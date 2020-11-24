@@ -3,28 +3,30 @@
 #include "math.h"
 #include "iostream"
 #include "cstdlib"
+#include "randomvaluesdialog.h"
+#include "sharedData.h"
+#include "string"
 
 Regress::Regress(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Regress)
 {
-    //Seed rand().
-    srand((unsigned)time(NULL));
-
+    //Don't Delete This!!!
     ui->setupUi(this);
 
+    this->setWindowTitle("Polynomial Regression");
     //Set up degree box.
-    ui->degreeBox->addItem("Zeroth Degree");
-    ui->degreeBox->addItem("First Degree");
-    ui->degreeBox->addItem("Second Degree");
-    ui->degreeBox->addItem("Third Degree");
-    ui->degreeBox->addItem("Fourth Degree");
-    ui->degreeBox->addItem("Fifth Degree");
-    ui->degreeBox->addItem("Sixth Degree");
-    ui->degreeBox->addItem("Seventh Degree");
-    ui->degreeBox->addItem("Eigth Degree");
-    ui->degreeBox->addItem("Ninth Degree");
-    ui->degreeBox->addItem("Tenth Degree");
+    ui->degreeBox->addItem("  Zeroth Degree");
+    ui->degreeBox->addItem("  First Degree");
+    ui->degreeBox->addItem("  Second Degree");
+    ui->degreeBox->addItem("  Third Degree");
+    ui->degreeBox->addItem("  Fourth Degree");
+    ui->degreeBox->addItem("  Fifth Degree");
+    ui->degreeBox->addItem("  Sixth Degree");
+    ui->degreeBox->addItem("  Seventh Degree");
+    ui->degreeBox->addItem("  Eigth Degree");
+    ui->degreeBox->addItem("  Ninth Degree");
+    ui->degreeBox->addItem("  Tenth Degree");
 
     //Set up addRowBox.
     ui->addRowBox->addItem("1");
@@ -80,6 +82,11 @@ void Regress::on_Plot_clicked()
     inputY.clear();
 
     int newX, newY;
+
+    xMax = 5;
+    xMin = 5;
+    yMax = 5;
+    yMin = 5;
 
     //Retrieve data from inputTable and store in Qvectors
     for(int i = 0; i < ui->inputTable->rowCount(); i++)
@@ -266,10 +273,10 @@ void Regress::leastSquares(int degree)
     //Set X and Y values for polynomial.
     int addRoomX = (xMax - xMin)/8;
 
-    double xDiff = (xMax + addRoomX - (xMin - addRoomX))/100.00;
+    double xDiff = (xMax + addRoomX - (xMin - addRoomX))/200.00;
     double currentX = (double) xMin - addRoomX;
     double newY;
-    for(int i = 0; i < 100; i++)
+    for(int i = 0; i < 200; i++)
     {
         newY = 0;
         fitX.append(currentX);
@@ -287,6 +294,24 @@ void Regress::leastSquares(int degree)
     ui->plotter->update();
 }
 
+void Regress::on_randomValues_clicked()
+{
+    RandomValuesDialog randomValuesDialog;
+    randomValuesDialog.setModal(true);
+    randomValuesDialog.setSharedData(&this->myData);
+    randomValuesDialog.exec();
 
+    std::cout << "There";
 
+    int numberOfValues = myData.getNumberOfVal();
+    double *randomXValues = myData.getXValues();
+    double *randomYValues = myData.getYValues();
 
+    ui->inputTable->setRowCount(numberOfValues);
+
+    for(int i = 0; i < numberOfValues; i++)
+    {
+        ui->inputTable->setItem(i, 0, new QTableWidgetItem(QString::number(randomXValues[i])));
+        ui->inputTable->setItem(i, 1, new QTableWidgetItem(QString::number(randomYValues[i])));
+    }
+}

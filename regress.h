@@ -2,6 +2,7 @@
 #define REGRESS_H
 
 #include <QMainWindow>
+#include "sharedData.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Regress; }
@@ -27,9 +28,13 @@ private slots:
 
     void on_polyFit_clicked();
 
+    void on_randomValues_clicked();
+
 private:
     Ui::Regress *ui;
     QVector<double> inputX, inputY, fitX, fitY;
     int xMax= 5, yMax = 5, xMin = 0, yMin = 0;
+    //Create a SharedData object which we will store data to be shared with other classes.
+    SharedData myData;
 };
 #endif // REGRESS_H

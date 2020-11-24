@@ -10,13 +10,19 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     qcustomplot.cpp \
-    regress.cpp
+    randomvaluesdialog.cpp \
+    regress.cpp \
+    shareddata.cpp
 
 HEADERS += \
+    SharedData.h \
     qcustomplot.h \
-    regress.h
+    randomvaluesdialog.h \
+    regress.h \
+    shareddata.h
 
 FORMS += \
+    randomvaluesdialog.ui \
     regress.ui
 
 # Default rules for deployment.
