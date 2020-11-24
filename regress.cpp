@@ -11,36 +11,45 @@ Regress::Regress(QWidget *parent)
     //Seed rand().
     srand((unsigned)time(NULL));
 
-    //Setup radio button id numbers.
     ui->setupUi(this);
-    ui->polyGroup->setId(ui->firstOrder, 1);
-    ui->polyGroup->setId(ui->secondOrder, 2);
-    ui->polyGroup->setId(ui->thirdOrder, 3);
-    ui->polyGroup->setId(ui->fourthOrder, 4);
-    ui->polyGroup->setId(ui->fifthOrder, 5);
-    ui->firstOrder->setChecked(true);
 
-    //Setup regress settings table.
-    ui->regressOptions->setColumnCount(3);
-    ui->regressOptions->setColumnWidth(0, ui->regressOptions->width()/3);
-    ui->regressOptions->setColumnWidth(1, ui->regressOptions->width()/3);
-    ui->regressOptions->setColumnWidth(2, ui->regressOptions->width()/3);
-    ui->regressOptions->setHorizontalHeaderItem(0, new QTableWidgetItem("Iterations"));
-    ui->regressOptions->setHorizontalHeaderItem(1, new QTableWidgetItem("Batch Prob"));
-    ui->regressOptions->setHorizontalHeaderItem(2, new QTableWidgetItem("Start Alpha"));
-    ui->regressOptions->setRowCount(1);
-    ui->regressOptions->verticalHeader()->setVisible(false);
+    //Set up degree box.
+    ui->degreeBox->addItem("Zeroth Degree");
+    ui->degreeBox->addItem("First Degree");
+    ui->degreeBox->addItem("Second Degree");
+    ui->degreeBox->addItem("Third Degree");
+    ui->degreeBox->addItem("Fourth Degree");
+    ui->degreeBox->addItem("Fifth Degree");
+    ui->degreeBox->addItem("Sixth Degree");
+    ui->degreeBox->addItem("Seventh Degree");
+    ui->degreeBox->addItem("Eigth Degree");
+    ui->degreeBox->addItem("Ninth Degree");
+    ui->degreeBox->addItem("Tenth Degree");
+
+    //Set up addRowBox.
+    ui->addRowBox->addItem("1");
+    ui->addRowBox->addItem("5");
+    ui->addRowBox->addItem("10");
+    ui->addRowBox->addItem("50");
+    ui->addRowBox->addItem("100");
+
+    //Set up removeRowBox.
+    ui->removeRowBox->addItem("1");
+    ui->removeRowBox->addItem("5");
+    ui->removeRowBox->addItem("10");
+    ui->removeRowBox->addItem("50");
+    ui->removeRowBox->addItem("100");
 
     //Setup input table.
     //Setup Columns.
     ui->inputTable->setColumnCount(2);
-    ui->inputTable->setColumnWidth(0, 164);
-    ui->inputTable->setColumnWidth(1, 165);
+    ui->inputTable->setColumnWidth(0, 160);
+    ui->inputTable->setColumnWidth(1, 160);
     ui->inputTable->setHorizontalHeaderItem(0, new QTableWidgetItem("X components"));
     ui->inputTable->setHorizontalHeaderItem(1, new QTableWidgetItem("Y components"));
 
     //Setup Rows.
-    ui->inputTable->setRowCount(8);
+    ui->inputTable->setRowCount(10);
 
     ui->inputTable->horizontalHeaderItem(0)->setBackground(QBrush(QColor(200, 100, 100)));
     ui->inputTable->horizontalHeaderItem(1)->setBackground(QBrush(QColor(200, 100, 100)));
@@ -69,6 +78,7 @@ void Regress::on_Plot_clicked()
 {
     inputX.clear();
     inputY.clear();
+
     int newX, newY;
 
     //Retrieve data from inputTable and store in Qvectors
@@ -117,119 +127,157 @@ void Regress::on_Plot_clicked()
 
 void Regress::on_polyFit_clicked()
 {
-    QTableWidgetItem *it = ui->regressOptions->item(0, 0);
-    QTableWidgetItem *pr = ui->regressOptions->item(0, 1);
-    QTableWidgetItem *al = ui->regressOptions->item(0, 2);
-
-    if(it && pr && al)
-    {
-        numOfIterations = it->text().toDouble();
-        probToChose = pr->text().toDouble();
-        alpha = al->text().toDouble();
-    }
-
-    int polyID = ui->polyGroup->checkedId();
-    switch (polyID)
-    {
-    case 1:
-        break;
-    case 2:
-        secondOrderPolyFit();
-        break;
-    case 3:
-        break;
-    case 4:
-        break;
-    case 5:
-        break;
-    }
+    int degree = ui->degreeBox->currentIndex();
+    leastSquares(degree);
 }
 
 void Regress::on_addRow_clicked()
 {
-    ui->inputTable->insertRow(ui->inputTable->rowCount());
+    int rowToAdd = ui->addRowBox->currentText().toInt();
+
+    for(int i = 0; i < rowToAdd; i++)
+    {
+        ui->inputTable->insertRow(ui->inputTable->rowCount());
+    }
 }
 
 void Regress::on_removeRow_clicked()
 {
-    ui->inputTable->removeRow(ui->inputTable->rowCount() - 1);
+    int rowToRemove = ui->removeRowBox->currentText().toInt();
+    for(int i = 0; i < rowToRemove; i++)
+    {
+        ui->inputTable->removeRow(ui->inputTable->rowCount() - 1);
+    }
 }
 
-void Regress::secondOrderPolyFit()
+void Regress::leastSquares(int degree)
 {
     fitX.clear();
     fitY.clear();
 
-    // ax^2 + bx + c
-    double a = 1.0, b = 0.0, c = 0.0;
-    double aNew = 1.0, bNew = 0.0, cNew = 0.0;
-    double aDir, bDir, cDir;
-    double Err = 0.0, newErr = 0.0;
-    int batchCount;
+    double matrixValues[(2 * degree) + 1];
+    double coef[degree + 1];
+    double AMatrix[degree + 1][2 * (degree + 1)];
+    double RVector[degree + 1];
 
-    //Initial mean squared error.
-    for(int i = 0; i < inputX.length(); i++)
+    // Coeffecients = (AMatrix)^-1 . RVector
+
+    //Calculate all the values to be placed in the A matrix
+    //We can calculate it via matrix . matrix, but there is a lot of repeated digits.
+    for(int i = 0; i < (2 * degree) + 1; i++)
     {
-        Err += pow(inputY.at(i) - (a * pow(inputX.at(i), 2) + b * inputX.at(i) + c), 2);
+        matrixValues[i] = 0;
+        for(int j = 0; j < inputX.length(); j++)
+        {
+            matrixValues[i] += pow(inputX.at(j), i);
+        }
     }
 
-    Err /= inputX.length();
-
-
-    int count = 0;
-    for(int i = 0; i < numOfIterations && count < 10000; i++)
+    //Initialise the left hand side of the A matrix using the values we paced in matrixValues.
+    for(int i = 0; i <= degree; i++)
     {
-        batchCount = 0;
-        newErr = 0.0;
-        aDir = 0.0;
-        bDir = 0.0;
-        cDir = 0.0;
+        for(int j = 0; j <= degree; j++)
+        {
+            AMatrix[i][j] = matrixValues[i + j];
+        }
+    }
 
+    //Initialise the Right Vector.
+    for(int i = 0; i <= degree; i++)
+    {
+        RVector[i]= 0;
         for(int j = 0; j < inputX.length(); j++)
         {
-            if(((double)rand())/((double)RAND_MAX) < probToChose)
+            RVector[i] += pow(inputX.at(j), i) * inputY.at(j);
+        }
+    }
+
+    //Initialise the Identity Matrix in the right hand side of the AMatrix.
+    for(int i = 0; i <= degree; i++)
+    {
+        for(int j = 0; j <= degree; j++)
+        {
+            if(i == j)
             {
-                batchCount++;
-                aDir += 2 * pow(inputX.at(j), 2.0) * (inputY.at(j) - (a * pow(inputX.at(j), 2.0) + b * inputX.at(j) + c));
-                bDir += 2 * inputX.at(j) * (inputY.at(j) - (a * pow(inputX.at(j), 2.0) + b * inputX.at(j) + c));
-                cDir += 2 * (inputY.at(j) - (a * pow(inputX.at(j), 2.0) + b * inputX.at(j) + c));
+                AMatrix[i][j + degree + 1] = 1;
+            }
+            else
+            {
+                AMatrix[i][j + degree + 1] = 0;
             }
         }
+    }
 
-        aDir /= batchCount;
-        bDir /= batchCount;
-        cDir /= batchCount;
+    //Prints AMatrix to check if it is initiallized properly.
+    //Test x = 1,2,5,6    y = 3,4,5,10
+    //This should give an AMatrix:
+    //  4  14
+    //  14 66
+    //    printf("\n");
+    //    for (int h = 0; h <= degree; h++)
+    //    {
+    //        for (int p = 0; p < 2 * (degree + 1); p++)
+    //        {
+    //            printf("%0.3f\t", AMatrix[h][p]);
+    //        }
+    //        printf("\n");
+    //    }
 
-        aNew += alpha * aDir;
-        bNew += alpha * bDir;
-        cNew += alpha * cDir;
+    //We can start Guass Jordan Elimination to find the inverse of AMatrix.
+    double multiplier;
 
-        for(int j = 0; j < inputX.length(); j++)
+    //Turn every component to zero where indexes are not the same, i != j.
+    for(int i = 0; i <= degree; i++)
+    {
+        for(int j = 0; j <= degree; j++)
         {
-            newErr += pow(inputY.at(j) - (aNew * pow(inputX.at(j), 2) + bNew * inputX.at(j) + cNew), 2);
+            if(i != j)
+            {
+                multiplier = AMatrix[j][i] / AMatrix[i][i];
+
+                for(int k = i + 1; k < 2 * (degree + 1); k++)
+                {
+                    AMatrix[j][k] -= multiplier * AMatrix[i][k];
+                }
+            }
         }
+    }
 
-        newErr /= inputX.length();
+    //Divide the right hand side by the corresponding middle components (i == j).
+    //After this, the right hand side should be the inverse matrix of the left hand side.
+    for(int i = 0; i <= degree; i++)
+    {
+        for(int j = 0; j <= degree; j++)
+        {
+            AMatrix[i][j + degree + 1] /= AMatrix[i][i];
+        }
+    }
 
-        if(true){
-            a = aNew;
-            b = bNew;
-            c = cNew;
-            Err = newErr;
-        }else{
-            count++;
-            alpha *= 0.5;
+    //Finally, we can calculate the coefficients of the polynomial.
+    for(int i = 0; i <= degree; i++)
+    {
+        coef[i] = 0;
+        for(int j = 0; j <= degree; j++)
+        {
+            coef[i] += AMatrix[i][j + degree + 1] * RVector[j];
         }
     }
 
     //Set X and Y values for polynomial.
-    double xDiff = (xMax - xMin)/100.00;
-    double currentX = (double) xMin;
+    int addRoomX = (xMax - xMin)/8;
 
+    double xDiff = (xMax + addRoomX - (xMin - addRoomX))/100.00;
+    double currentX = (double) xMin - addRoomX;
+    double newY;
     for(int i = 0; i < 100; i++)
     {
+        newY = 0;
         fitX.append(currentX);
-        fitY.append(a * pow(currentX, 2) + b * currentX + c);
+        for(int j = 0; j <= degree; j++)
+        {
+            newY += coef[j] * pow(currentX, j);
+        }
+        fitY.append(newY);
         currentX += xDiff;
     }
 
@@ -237,7 +285,6 @@ void Regress::secondOrderPolyFit()
     ui->plotter->graph(1)->setData(fitX, fitY);
     ui->plotter->replot();
     ui->plotter->update();
-
 }
 
 

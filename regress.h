@@ -14,7 +14,7 @@ class Regress : public QMainWindow
 public:
     Regress(QWidget *parent = nullptr);
 
-    void secondOrderPolyFit();
+    void leastSquares(int degree);
 
     ~Regress();
 
@@ -31,6 +31,5 @@ private:
     Ui::Regress *ui;
     QVector<double> inputX, inputY, fitX, fitY;
     int xMax= 5, yMax = 5, xMin = 0, yMin = 0;
-    double probToChose, numOfIterations, alpha;
 };
 #endif // REGRESS_H

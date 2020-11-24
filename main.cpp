@@ -8,4 +8,5 @@ int main(int argc, char *argv[])
     Regress w;
     w.show();
     return a.exec();
+
 }
