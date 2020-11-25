@@ -30,6 +30,7 @@ There are four buttons in the top left corner:
 Will add other functions like exponential and maybe trig functions later on. 
 - Currently working on adding an icon and will also add the calculated polynomial equation : Finished.
 - Next is for the app to able to read .xslx files (the first two columns) for the X & Y values.
+- Will also add methods the user could choose to calculate the error (for example, the Mean Squared Error).
 
 
 
