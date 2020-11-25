@@ -302,14 +302,14 @@ void Regress::leastSquares(int degree)
     QString result = "Function: ";
     for(int i = 0; i <= degree; i++)
     {
-        QString newString = QString::number(abs(round(coef[i]*1000.0)/1000.0)) + "x^" + QString::number(i);
+        QString newString = QString::number(abs(coef[i])) + "x^" + QString::number(i);
 
         if(result.length() + newString.length() > 90 && result.length() <= 93)
         {
             result += "\n\t";
         }
 
-        if(coef[i] > 0)
+        if(coef[i] >= 0)
         {
             if(i != 0)
             {
