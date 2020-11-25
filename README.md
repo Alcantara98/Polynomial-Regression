@@ -8,7 +8,9 @@ I tried stochastic and mini-batch gradient descent to fit second order polynomia
 so in the end I decided to do it analytically using the Least Squares method.
 [Here](https://www.youtube.com/watch?v=TPKyT3hu71c) is a video explaining the method.  
   
-My implementation for the Least Squares method is found in the regress.cpp source file in the leastSquares function. I used Gauss Jordan Elimination to find the inverse of the A^T.A matrix. Also note that I combined the Identity matrix to the A^T.A matrix so row operations could be done more easily.
+My implementation for the Least Squares method is found in the regress.cpp source file in the leastSquares function. I used Gauss Jordan Elimination to find the inverse of the A^T.A matrix. Also note that I combined the Identity matrix to the A^T.A matrix so row operations could be done more easily.  
+  
+I am currently using xorshf96() to generate the random values and seeding it with time(). It seems to be working better than rand().
 
 ## Technologies
 - C++
