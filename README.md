@@ -26,7 +26,7 @@ There are four buttons in the top left corner:
 - Top-Right: Click to plot the values in the table.
 - Bottom-Right: Click to fit a polynomial, of the chosen order, to the set of points and plot it.  
   
-To edit project, you will need QT Creator Open Source which you can download [here](https://www.qt.io/download-open-source). Once downloaded and installed, open it and click 'file->open file or project' and navigate to this repository and open 'Regress.pro'.
+To edit the project, you will need QT Creator Open Source which you can download [here](https://www.qt.io/download-open-source). Once downloaded and installed, open it and click 'file->open file or project' and navigate to this repository and open 'Regress.pro'.
 
 ## Status
 Will add other functions like exponential and maybe trig functions later on. 
