@@ -17,7 +17,7 @@ My implementation for the Least Squares method is found in the regress.cpp sourc
 - Git
 
 ## How to Use
-The latest version is in the folder 'V1.02' of the repository. Just download it and run 'Regress.exe'.  
+The latest version can be found [here](https://github.com/Alcantara98/Regress_Latest_Version). Just download the repository and run 'Regress.exe'.  
 There are four buttons in the top left corner:  
 - Top-Left: Choose the order of polynomial you want to fit.
 - Bottom-Left: Generate random values. There are initial values set, if any is left blank, it will choose the initial values by default. Otherwise, you can enter your own values directly on the table.
@@ -25,7 +25,9 @@ There are four buttons in the top left corner:
 - Bottom-Right: Click to fit a polynomial, of the chosen order, to the set of points and plot it.
 
 ## Status
-Will add other functions like exponential and maybe trig functions later on. Currently working on adding an icon and will also add the calculated polynomial equation.
+Will add other functions like exponential and maybe trig functions later on. 
+- Currently working on adding an icon and will also add the calculated polynomial equation : Finished.
+- Next is for the app to able to read .xslx files (the first two columns) for the X & Y values.
 
 
 
