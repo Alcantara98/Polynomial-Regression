@@ -14,7 +14,9 @@ Regress::Regress(QWidget *parent)
     //Don't Delete This!!!
     ui->setupUi(this);
 
+    this->setWindowIcon(QIcon(":/regress.ico"));
     this->setWindowTitle("Polynomial Regression");
+
     //Set up degree box.
     ui->degreeBox->addItem("  Zeroth Degree");
     ui->degreeBox->addItem("  First Degree");
@@ -75,9 +77,10 @@ Regress::~Regress()
     delete ui;
 }
 
-
+//Plots the values that are in the inputTable object.
 void Regress::on_Plot_clicked()
 {
+    //Clear otherwise we will append current/new values to the previous values.
     inputX.clear();
     inputY.clear();
 
@@ -88,7 +91,7 @@ void Regress::on_Plot_clicked()
     yMax = 5;
     yMin = 5;
 
-    //Retrieve data from inputTable and store in Qvectors
+    //Retrieve data from inputTable and store in the Qvectors
     for(int i = 0; i < ui->inputTable->rowCount(); i++)
     {
         QTableWidgetItem *x = ui->inputTable->item(i, 0);
@@ -157,6 +160,8 @@ void Regress::on_removeRow_clicked()
     }
 }
 
+//Polynomial Regression using Least Squares method.
+//@param degree of polynomial to be fit.
 void Regress::leastSquares(int degree)
 {
     fitX.clear();
@@ -292,26 +297,61 @@ void Regress::leastSquares(int degree)
     ui->plotter->graph(1)->setData(fitX, fitY);
     ui->plotter->replot();
     ui->plotter->update();
+
+    //Show function.
+    QString result = "Function: ";
+    for(int i = 0; i <= degree; i++)
+    {
+        QString newString = QString::number(abs(round(coef[i]*1000.0)/1000.0)) + "x^" + QString::number(i);
+
+        if(result.length() + newString.length() > 90 && result.length() < 90)
+        {
+            result += "\n\t";
+        }
+
+        if(coef[i] > 0)
+        {
+            if(i != 0)
+            {
+                result += " + ";
+            }
+        }
+        else
+        {
+            result += " - ";
+
+        }
+        result += newString;
+    }
+
+    ui->polyFunction->setText(result);
 }
 
+//Generates random values to be placed in inputTable object.
 void Regress::on_randomValues_clicked()
 {
+    //Set to false, if values are generated it will be set to true by randomValuesDialog.
+    myData.setGenerate(false);
+
     RandomValuesDialog randomValuesDialog;
     randomValuesDialog.setModal(true);
     randomValuesDialog.setSharedData(&this->myData);
     randomValuesDialog.exec();
 
-    std::cout << "There";
-
-    int numberOfValues = myData.getNumberOfVal();
-    double *randomXValues = myData.getXValues();
-    double *randomYValues = myData.getYValues();
-
-    ui->inputTable->setRowCount(numberOfValues);
-
-    for(int i = 0; i < numberOfValues; i++)
+    //If values are generated, we retrieve the random values and assign them to inputTable.
+    if(myData.getGenerate())
     {
-        ui->inputTable->setItem(i, 0, new QTableWidgetItem(QString::number(randomXValues[i])));
-        ui->inputTable->setItem(i, 1, new QTableWidgetItem(QString::number(randomYValues[i])));
+
+        int numberOfValues = myData.getNumberOfVal();
+        double *randomXValues = myData.getXValues();
+        double *randomYValues = myData.getYValues();
+
+        ui->inputTable->setRowCount(numberOfValues);
+
+        for(int i = 0; i < numberOfValues; i++)
+        {
+            ui->inputTable->setItem(i, 0, new QTableWidgetItem(QString::number(randomXValues[i])));
+            ui->inputTable->setItem(i, 1, new QTableWidgetItem(QString::number(randomYValues[i])));
+        }
     }
 }

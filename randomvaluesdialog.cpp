@@ -8,6 +8,7 @@ RandomValuesDialog::RandomValuesDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Random Values");
+    this->setWindowIcon(QIcon(":/regress.ico"));
 }
 
 RandomValuesDialog::~RandomValuesDialog()
@@ -22,6 +23,9 @@ void RandomValuesDialog::setSharedData(SharedData *sharedData)
 
 void RandomValuesDialog::on_generateValues_clicked()
 {
+    myData->setGenerate(true);
+    ui->generateLabel->setText("Values have been generated!!! \nPlease close the window.");
+
     double xMin, xMax, yMin, yMax;
     int numberOfValues;
 
@@ -56,5 +60,4 @@ void RandomValuesDialog::on_generateValues_clicked()
     }
 
     myData->generateValues(numberOfValues, xMin, xMax, yMin, yMax);
-    std::cout << "Hello";
 }

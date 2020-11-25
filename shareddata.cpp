@@ -57,3 +57,13 @@ int SharedData::getNumberOfVal()
 {
     return this->numberOfValues;
 }
+
+void SharedData::setGenerate(bool generate)
+{
+    this->generate = generate;
+}
+
+bool SharedData::getGenerate()
+{
+    return this->generate;
+}
