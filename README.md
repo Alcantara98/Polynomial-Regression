@@ -24,12 +24,15 @@ There are four buttons in the top left corner:
 - Top-Left: Choose the order of polynomial you want to fit.
 - Bottom-Left: Generate random values. There are initial values set, if any is left blank, it will choose the initial values by default. Otherwise, you can enter your own values directly on the table.
 - Top-Right: Click to plot the values in the table.
-- Bottom-Right: Click to fit a polynomial, of the chosen order, to the set of points and plot it.
+- Bottom-Right: Click to fit a polynomial, of the chosen order, to the set of points and plot it.  
+  
+To edit the project, you will need QT Creator Open Source which you can download [here](https://www.qt.io/download-open-source). Once downloaded and installed, open it and click 'file->open file or project' and navigate to this repository and open 'Regress.pro'.
 
 ## Status
 Will add other functions like exponential and maybe trig functions later on. 
 - Currently working on adding an icon and will also add the calculated polynomial equation : Finished.
 - Next is for the app to able to read .xslx files (the first two columns) for the X & Y values.
+- Will also add methods the user could choose to calculate the error (for example, the Mean Squared Error).
 
 
 
