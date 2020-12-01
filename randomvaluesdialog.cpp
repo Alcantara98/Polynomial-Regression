@@ -15,6 +15,9 @@ RandomValuesDialog::RandomValuesDialog(QWidget *parent) :
     ui->minYValueLineEdit->setText("0");
     ui->maxYValueLineEdit->setText("50");
     ui->amountLineEdit->setText("15");
+
+//    ui->generateValues->setFixedHeight(60);
+//    ui->generateLabel->setFixedHeight(50);
 }
 
 RandomValuesDialog::~RandomValuesDialog()

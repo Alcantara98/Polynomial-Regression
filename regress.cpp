@@ -17,6 +17,8 @@ Regress::Regress(QWidget *parent)
     this->setWindowIcon(QIcon(":/regress.ico"));
     this->setWindowTitle("Polynomial Regression");
 
+    ui->polyFunction->setWordWrap(true);
+
     //Set up degree box.
     ui->degreeBox->addItem("  Zeroth Degree");
     ui->degreeBox->addItem("  First Degree");
@@ -304,10 +306,10 @@ void Regress::leastSquares(int degree)
     {
         QString newString = QString::number(abs(coef[i])) + "x^" + QString::number(i);
 
-        if(result.length() + newString.length() > 90 && result.length() <= 93)
-        {
-            result += "\n\t";
-        }
+//        if(result.length() + newString.length() > 90 && result.length() <= 93)
+//        {
+//            result += "\n\t";
+//        }
 
         if(coef[i] >= 0)
         {
