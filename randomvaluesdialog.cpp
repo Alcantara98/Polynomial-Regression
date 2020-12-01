@@ -9,6 +9,12 @@ RandomValuesDialog::RandomValuesDialog(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowTitle("Random Values");
     this->setWindowIcon(QIcon(":/regress.ico"));
+
+    ui->minXValueLineEdit->setText("0");
+    ui->maxXValueLineEdit->setText("40");
+    ui->minYValueLineEdit->setText("0");
+    ui->maxYValueLineEdit->setText("50");
+    ui->amountLineEdit->setText("15");
 }
 
 RandomValuesDialog::~RandomValuesDialog()
@@ -29,34 +35,34 @@ void RandomValuesDialog::on_generateValues_clicked()
     double xMin, xMax, yMin, yMax;
     int numberOfValues;
 
-    if(ui->numberOfValues->toPlainText().isEmpty()){
+    if(ui->amountLineEdit->text().isEmpty()){
         numberOfValues = 15;
     }else{
-        numberOfValues = ui->numberOfValues->toPlainText().toInt();
+        numberOfValues = ui->amountLineEdit->text().toInt();
     }
 
-    if(ui->xMinInput->toPlainText().isEmpty()){
+    if(ui->minXValueLineEdit->text().isEmpty()){
         xMin = 0;
     }else{
-        xMin = ui->xMinInput->toPlainText().toDouble();
+        xMin = ui->minXValueLineEdit->text().toDouble();
     }
 
-    if(ui->xMaxInput->toPlainText().isEmpty()){
+    if(ui->maxXValueLineEdit->text().isEmpty()){
         xMax = 40;
     }else{
-        xMax = ui->xMaxInput->toPlainText().toDouble();
+        xMax = ui->maxXValueLineEdit->text().toDouble();
     }
 
-    if(ui->yMinInput->toPlainText().isEmpty()){
+    if(ui->minYValueLabel->text().isEmpty()){
         yMin = 0;
     }else{
-        yMin = ui->yMinInput->toPlainText().toDouble();
+        yMin = ui->minYValueLabel->text().toDouble();
     }
 
-    if(ui->yMaxInput->toPlainText().isEmpty()){
+    if(ui->maxYValueLabel->text().isEmpty()){
         yMax = 50;
     }else{
-        yMax = ui->yMaxInput->toPlainText().toDouble();
+        yMax = ui->maxYValueLineEdit->text().toDouble();
     }
 
     myData->generateValues(numberOfValues, xMin, xMax, yMin, yMax);

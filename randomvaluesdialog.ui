@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>212</width>
-    <height>342</height>
+    <height>291</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>230</y>
+     <y>180</y>
      <width>181</width>
      <height>61</height>
     </rect>
@@ -33,166 +33,11 @@
     <string>Generate Random Values</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>20</y>
-     <width>111</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Min X Values:</string>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="xMinInput">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>10</y>
-     <width>71</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="plainText">
-    <string>0</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>60</y>
-     <width>111</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Max X Values:</string>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="xMaxInput">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>50</y>
-     <width>71</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="plainText">
-    <string>40</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>100</y>
-     <width>101</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Min Y Values:</string>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="yMinInput">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>90</y>
-     <width>71</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="plainText">
-    <string>0</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>140</y>
-     <width>111</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Max Y Values:</string>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="yMaxInput">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>130</y>
-     <width>71</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="plainText">
-    <string>50</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_5">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>170</y>
-     <width>171</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Amount to Generate:</string>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="numberOfValues">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>190</y>
-     <width>151</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="plainText">
-    <string>15</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="generateLabel">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>300</y>
+     <y>250</y>
      <width>181</width>
      <height>31</height>
     </rect>
@@ -201,6 +46,68 @@
     <string>You can enter your own values. 
 Will use initial values if blank.</string>
    </property>
+  </widget>
+  <widget class="QWidget" name="formLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>181</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="minXValueLabel">
+      <property name="text">
+       <string>Min X Value</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="minXValueLineEdit"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="maxXValueLabel">
+      <property name="text">
+       <string>Max X Value</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="maxXValueLineEdit"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="minYValueLabel">
+      <property name="text">
+       <string>Min Y Value</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="minYValueLineEdit"/>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="maxYValueLabel">
+      <property name="text">
+       <string>Max Y Value</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="maxYValueLineEdit"/>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="amountLabel">
+      <property name="text">
+       <string>Amount</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLineEdit" name="amountLineEdit"/>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
