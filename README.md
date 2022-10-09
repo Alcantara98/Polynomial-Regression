@@ -3,9 +3,8 @@
 Earlier this year, in the artificial intelligence paper I took, we created a Python application 
 that used gradient descent to fit a first order polynomial to a set of points. I decided to re-visit 
 the method in hopes of using it to fit any order of polynomial to a set of points and realized it got 
-stuck on local minimums for polynomials of order greater than one ☹.  
-I tried stochastic and mini-batch gradient descent to fit second order polynomials to no avail, 
-so in the end I decided to do it analytically using the Least Squares method.
+stuck on local minimums for polynomials of order greater than one.  
+In the end I decided to do it analytically using the Least Squares method.
 [Here](https://www.youtube.com/watch?v=TPKyT3hu71c) is a video explaining the method.  
   
 My implementation for the Least Squares method is found in the regress.cpp source file in the leastSquares function. I used Gauss Jordan Elimination to find the inverse of the A^T.A matrix. Also note that I combined the Identity matrix to the A^T.A matrix so row operations could be done more easily.  
